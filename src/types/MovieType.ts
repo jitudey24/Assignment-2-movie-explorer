@@ -29,3 +29,8 @@ export interface MovieType {
 
   type?: string;
 }
+
+export interface SearchResult {
+  score: number;
+  show: MovieType;
+}

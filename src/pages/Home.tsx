@@ -14,8 +14,8 @@ const Home = () => {
         <div className="absolute inset-0 bg-black/60"></div>
 
         {/* Hero Content */}
-        <div className="relative z-10 mx-auto flex min-h-[600px] max-w-7xl items-center px-5">
-          <div className="max-w-2xl text-white">
+        <div className="relative z-10 mx-auto flex min-h-[600px] max-w-7xl items-center justify-center px-5">
+          <div className="max-w-2xl text-center text-white">
             <p className="mb-4 text-lg font-semibold text-pink-400">
               Welcome to MovieExplorer
             </p>
@@ -101,3 +101,6 @@ const Home = () => {
 };
 
 export default Home;
+
+
+

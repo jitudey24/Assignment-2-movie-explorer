@@ -1,42 +1,49 @@
-import type { MovieType } from "../type/MovieType";
+import type { MovieType } from "../types/MovieType";
 
 interface MovieCardProps {
   movie: MovieType;
   onSeeDetails: (movie: MovieType) => void;
 }
 
+
 const MovieCard = ({ movie, onSeeDetails }: MovieCardProps) => {
-  return (
-    <div className="overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
-      <img
-        src={
-          movie.image?.medium ||
-          "https://via.placeholder.com/300x450?text=No+Image"
-        }
-        alt={movie.name}
-        className="h-80 w-full object-cover"
-      />
+    const show = movie.show || movie;
 
-      <div className="p-5">
-        <h2 className="truncate text-xl font-bold text-slate-800">
-          {movie.name}
-        </h2>
+    return (
+      <div className="overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+        {/* Movie Poster */}
+        <img
+          src={
+            show.image?.medium ||
+            "https://via.placeholder.com/300x450?text=No+Image"
+          }
+          alt={show.name}
+          className="h-80 w-full object-cover"
+        />
 
-        <div className="mt-3 flex items-center justify-between text-sm text-slate-500">
-          <span>📅 {movie.premiered?.slice(0, 4) || "N/A"}</span>
-          <span>⭐ {movie.rating?.average ?? "N/A"}</span>
+        {/* Movie Information */}
+        <div className="p-5">
+          <h2 className="truncate text-xl font-bold text-slate-800">
+            {show.name}
+          </h2>
+
+          <div className="mt-3 flex items-center justify-between text-sm text-slate-500">
+            <span>📅 {show.premiered?.slice(0, 4) || "N/A"}</span>
+
+            <span>⭐ {show.rating?.average || "N/A"}</span>
+          </div>
+
+          {/* See Details Button */}
+          <button
+            onClick={() => onSeeDetails(show)}
+            className="mt-5 w-full rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-white transition hover:bg-pink-600"
+          >
+            See Details
+          </button>
         </div>
-
-        <button
-          type="button"
-          onClick={() => onSeeDetails(movie)}
-          className="mt-5 w-full rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-white transition hover:bg-pink-600"
-        >
-          See Details
-        </button>
       </div>
-    </div>
-  );
-};
+    );
+  };
+
 
 export default MovieCard;
