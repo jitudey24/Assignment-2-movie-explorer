@@ -3,7 +3,7 @@ import MovieCard from "../components/MovieCard";
 import MovieModal from "../components/MovieModal";
 import Loading from "../components/Loading";
 import { getShows, searchShows } from "../services/tvmazeApi";
-import type { MovieType } from "../type/MovieType";
+import type { MovieType } from "../types/MovieType";
 
 const Movies = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
@@ -30,7 +30,9 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
-    if (!search.trim()) return;
+    if (!search.trim()) {
+      return;
+    }
 
     const timer = window.setTimeout(async () => {
       try {
