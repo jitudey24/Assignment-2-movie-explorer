@@ -12,6 +12,15 @@ const Movies = () => {
   const [error, setError] = useState("");
   const [selectedMovie, setSelectedMovie] = useState<MovieType | null>(null);
 
+  const handleSeeDetails = (movie: MovieType) => {
+    console.log("Opening details for:", movie.name);
+    setSelectedMovie(movie);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -30,9 +39,7 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
-    if (!search.trim()) {
-      return;
-    }
+    if (!search.trim()) return;
 
     const timer = window.setTimeout(async () => {
       try {
@@ -91,17 +98,14 @@ const Movies = () => {
               <MovieCard
                 key={movie.id}
                 movie={movie}
-                onSeeDetails={setSelectedMovie}
+                onSeeDetails={handleSeeDetails}
               />
             ))}
           </div>
         )}
 
-        {selectedMovie && (
-          <MovieModal
-            movie={selectedMovie}
-            onClose={() => setSelectedMovie(null)}
-          />
+        {selectedMovie !== null && (
+          <MovieModal movie={selectedMovie} onClose={handleCloseModal} />
         )}
       </div>
     </main>
