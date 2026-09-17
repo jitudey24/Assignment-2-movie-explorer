@@ -1,3 +1,10 @@
+export interface CrewMember {
+  type?: string;
+  person?: {
+    name?: string;
+  };
+}
+
 export interface MovieType {
   id: number;
   name: string;
@@ -28,6 +35,10 @@ export interface MovieType {
   };
 
   type?: string;
+
+  _embedded?: {
+    crew?: CrewMember[];
+  };
 }
 
 export interface SearchResult {
