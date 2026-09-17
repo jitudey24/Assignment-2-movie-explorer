@@ -1,10 +1,18 @@
-import type { MovieType } from "../type/MovieType";
+import type { MovieType, SearchResult } from "../types/MovieType";
 
 const BASE_URL = "https://api.tvmaze.com";
 
-export interface SearchResult {
-  score: number;
-  show: MovieType;
+interface CrewMember {
+  type?: string;
+  person?: {
+    name?: string;
+  };
+}
+
+export interface ShowDetails extends MovieType {
+  _embedded?: {
+    crew?: CrewMember[];
+  };
 }
 
 export const getShows = async (): Promise<MovieType[]> => {
@@ -27,4 +35,14 @@ export const searchShows = async (query: string): Promise<SearchResult[]> => {
   }
 
   return (await response.json()) as SearchResult[];
+};
+
+export const getShowDetails = async (id: number): Promise<ShowDetails> => {
+  const response = await fetch(`${BASE_URL}/shows/${id}?embed=crew`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie details");
+  }
+
+  return (await response.json()) as ShowDetails;
 };
