@@ -6,11 +6,6 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ movie, onSeeDetails }: MovieCardProps) => {
-  const handleDetailsClick = () => {
-    console.log("See Details clicked:", movie.name);
-    onSeeDetails(movie);
-  };
-
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
       <img
@@ -29,8 +24,8 @@ const MovieCard = ({ movie, onSeeDetails }: MovieCardProps) => {
 
         <button
           type="button"
-          onClick={handleDetailsClick}
-          className="mt-5 w-full cursor-pointer rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-white transition hover:bg-pink-600"
+          onClick={() => onSeeDetails(movie)}
+          className="relative z-20 mt-5 block w-full cursor-pointer rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-white transition hover:bg-pink-600"
         >
           See Details
         </button>
